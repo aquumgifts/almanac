@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://aquumgifts.github.io/almanac/sitemap.xml
