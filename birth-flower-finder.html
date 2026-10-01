@@ -44,6 +44,8 @@ ul { padding-left: 22px; }
 .resultado .mes { font-size: 0.85em; letter-spacing: 0.12em; text-transform: uppercase; color: var(--salvia); }
 .resultado .flor { font-size: 1.8em; font-style: italic; color: var(--rosa); }
 .resultado .segunda { color: var(--suave); }
+.resultado .dibujos { display: flex; gap: 14px; align-items: flex-end; }
+.resultado .dibujos figure { margin: 0; text-align: center; font-size: 0.8em; color: var(--suave); }
 .figura { display: block; width: 100%; max-width: 480px; height: auto; margin: 8px auto; border: 1px solid var(--linea); }
 .llamado { margin: 40px 0 0; padding: 22px; text-align: center; border: 1px solid var(--linea); background: #fbf8f3; }
 footer { border-top: 1px solid var(--linea); padding-top: 18px; padding-bottom: 40px; text-align: center; }
@@ -64,6 +66,7 @@ footer { border-top: 1px solid var(--linea); padding-top: 18px; padding-bottom: 
 <input type="date" id="fecha" />
 <div id="resultado" class="resultado" hidden></div>
 </div>
+<script src="flores.js"></script>
 <script>
 (function () {
   var FLORES = [
@@ -91,6 +94,13 @@ footer { border-top: 1px solid var(--linea); padding-top: 18px; padding-bottom: 
     var flor = document.createElement("p"); flor.className = "flor"; flor.textContent = f[1];
     var sig = document.createElement("p"); sig.textContent = "It means " + f[2] + ".";
     caja.append(mes, flor, sig);
+    if (window.aquumFlor) {
+      var dibujos = document.createElement("div"); dibujos.className = "dibujos";
+      var dibujo = function (svg, nombre, tam) { return '<figure><svg width="' + tam + '" height="' + tam + '" viewBox="-52 -52 104 104" aria-hidden="true">' + svg + '</svg><figcaption>' + nombre + '</figcaption></figure>'; };
+      var m = Number(partes[1]) - 1;
+      dibujos.innerHTML = dibujo(aquumFlor(m), f[1], 120) + (f[3] ? dibujo(aquumFlorSegunda(m), f[3], 84) : "");
+      caja.append(dibujos);
+    }
     if (f[3]) { var seg = document.createElement("p"); seg.className = "segunda"; seg.textContent = "Second flower: " + f[3] + ", " + f[4] + "."; caja.append(seg); }
     var enlace = document.createElement("a"); enlace.href = f[5] + ".html"; enlace.textContent = "Read the full " + f[0] + " guide";
     caja.append(enlace);
