@@ -263,5 +263,9 @@
     window.aquumFlor(mes)
       .replace(/fill="#[0-9a-fA-F]{6}"/g, 'fill="#ffffff"')
       .replace(/stroke="#[0-9a-fA-F]{6}"/g, 'stroke="#2f2e2b"');
+  window.aquumSegundaColorear = (mes) =>
+    window.aquumFlorSegunda(mes)
+      .replace(/fill="#[0-9a-fA-F]{6}"/g, 'fill="#ffffff"')
+      .replace(/stroke="#[0-9a-fA-F]{6}"/g, 'stroke="#2f2e2b"');
   window.AQUUM_FLOR_COLORES = { L, F, F2, C, V, VF };
 })();
