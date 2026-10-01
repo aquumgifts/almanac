@@ -260,6 +260,42 @@
   };
   /** La misma flor en línea negra y relleno blanco, para colorear. */
   /**
+   * Ramo con las flores de varios meses (una por persona), en una caja de
+   * -150 a 150 de ancho y -175 a 175 de alto, en cúpula: tallos que se juntan abajo,
+   * un papel de envolver y un lazo. Hasta 8 flores; los meses pueden repetirse.
+   */
+  const RAMOS = [
+    [],
+    [[0, -48]],
+    [[-42, -40], [42, -40]],
+    [[-62, -18], [0, -73], [62, -18]],
+    [[-75, -13], [-28, -78], [28, -78], [75, -13]],
+    [[-85, -8], [-42, -83], [42, -83], [85, -8], [0, -23]],
+    [[-92, -3], [-56, -78], [0, -103], [56, -78], [92, -3], [0, -18]],
+    [[-96, 2], [-66, -73], [-14, -106], [42, -93], [92, -33], [-32, -13], [36, -8]],
+    [[-100, 7], [-76, -66], [-26, -106], [30, -102], [80, -62], [102, 7], [-32, -16], [36, -14]],
+  ];
+  window.aquumRamo = (meses) => {
+    const n = Math.min(meses.length, 8);
+    if (!n) return "";
+    const pos = RAMOS[n];
+    const escala = n <= 3 ? 1.05 : n <= 5 ? 0.92 : 0.8;
+    let s = "";
+    for (const [x, y] of pos) s += `<path d="M0 150 Q ${f(x * 0.3)} ${f(y * 0.3 + 60)}, ${f(x)} ${f(y)}" fill="none" stroke="${V}" ${W}/>`;
+    s += hojita("M-10 52 C -44 36, -66 14, -100 18 C -82 42, -48 58, -10 52 Z") + hojita("M10 52 C 44 36, 66 14, 100 18 C 82 42, 48 58, 10 52 Z");
+    // De atrás (arriba) hacia adelante (abajo), para que las de adelante tapen.
+    const orden = pos.map((_, i) => i).sort((a, b) => pos[a][1] - pos[b][1]);
+    for (const i of orden) s += `<g transform="translate(${pos[i][0]} ${pos[i][1]}) scale(${escala})">${window.aquumFlor(meses[i])}</g>`;
+    // Puntas de los tallos asomando bajo el papel.
+    s += `<path d="M-4 150 L-9 172 M0 150 L0 174 M4 150 L9 172" stroke="${V}" ${W}/>`;
+    // Papel de envolver en cono, con borde en zigzag, y lazo.
+    s += `<path d="M-66 40 L66 40 L10 156 L-10 156 Z" fill="#fbf3ea" stroke="${L}" ${W}/>`;
+    s += `<path d="M-66 40 L-44 54 L-22 40 L0 54 L22 40 L44 54 L66 40" fill="none" stroke="${L}" stroke-width="1.6" stroke-linejoin="round"/>`;
+    s += `<path d="M0 104 C -20 86, -40 92, -35 106 C -30 118, -12 114, 0 104 Z M0 104 C 20 86, 40 92, 35 106 C 30 118, 12 114, 0 104 Z" fill="${F2}" stroke="${L}" ${W}/>`;
+    s += `<path d="M-3 106 L-15 136 M3 106 L15 136" stroke="${L}" ${W}/>` + circulo(5.5, F, 0, 104);
+    return s;
+  };
+  /**
    * Pasa un dibujo a línea de un solo color sobre blanco, para colorear o para
    * clipart: los rellenos quedan blancos, salvo los puntitos sin borde
    * (estambres), que toman el color de la línea para no desaparecer.
