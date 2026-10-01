@@ -111,7 +111,15 @@ footer { border-top: 1px solid var(--linea); padding-top: 18px; padding-bottom: 
       dibujos.innerHTML = dibujo(aquumFlor(m), f[1], 120) + (f[3] ? dibujo(aquumFlorSegunda(m), f[3], 84) : "");
       caja.append(dibujos);
     }
-    if (f[3]) { var seg = document.createElement("p"); seg.className = "segunda"; seg.textContent = "Second flower: " + f[3] + ", " + f[4] + "."; caja.append(seg); }
+    if (f[3]) {
+      // Cada segunda flor tiene su guía: snowdrop → snowdrop-birth-flower-meaning.html
+      var seg = document.createElement("p"); seg.className = "segunda";
+      var enlaceSeg = document.createElement("a");
+      enlaceSeg.href = f[3].toLowerCase().replace(/ /g, "-") + "-birth-flower-meaning.html";
+      enlaceSeg.textContent = f[3];
+      seg.append("Second flower: ", enlaceSeg, ", " + f[4] + ".");
+      caja.append(seg);
+    }
     var enlace = document.createElement("a"); enlace.href = f[5] + ".html"; enlace.textContent = "Read the full " + f[0] + " guide";
     caja.append(enlace);
     caja.hidden = false;
