@@ -33,6 +33,8 @@ ul { padding-left: 22px; }
 .tarjetas a { color: var(--tinta); text-decoration: none; font-size: 22px; }
 .tarjetas p { margin: 6px 0 0; font-size: 16px; color: var(--suave); }
 .pin { margin: 22px auto 30px; max-width: 360px; }
+.dibujo-flor { float: right; width: 120px; height: 120px; margin: 4px 0 12px 18px; }
+.dibujo-flor svg { width: 100%; height: 100%; }
 .pin img { display: block; width: 100%; height: auto; border: 1px solid var(--linea); }
 .destacado { display: flex; gap: 18px; align-items: center; margin: 26px 0 8px; padding: 16px; border: 1px solid var(--linea); background: #fbf8f3; text-decoration: none; color: inherit; }
 .destacado img { width: 110px; height: auto; border: 1px solid var(--linea); flex: none; }
@@ -64,8 +66,10 @@ footer { border-top: 1px solid var(--linea); padding-top: 18px; padding-bottom: 
 
 <p>July's birth flowers are the <strong>larkspur</strong> and the <strong>water lily</strong>. Larkspur grows in tall spikes of blue, purple, pink or white, a summer flower through and through.</p>
 <h2>What larkspur means</h2>
+<div class="dibujo-flor" data-flor="6" role="img" aria-label="Line drawing of the larkspur"></div>
 <p>Larkspur stands for <strong>an open heart and a strong bond</strong>, along with lightness and a sense of fun. Its name comes from the shape of its flowers, which look like a lark's claw.</p>
 <h2>The water lily, July's second flower</h2>
+<div class="dibujo-flor" data-segunda="6" role="img" aria-label="Line drawing of the water lily"></div>
 <p>The water lily means <strong>purity and rebirth</strong>. It opens in the morning and closes at night, rising clean from muddy water, which has made it a symbol of renewal in many cultures.</p>
 <h2>A safety note</h2>
 <p>Larkspur is <strong>toxic</strong> to people, pets and livestock if eaten. It's safe to admire and to have as cut flowers out of reach, but not a plant for a home with curious pets or small children. A larkspur <em>design</em> is the worry-free version.</p>
@@ -84,8 +88,16 @@ footer { border-top: 1px solid var(--linea); padding-top: 18px; padding-bottom: 
 </ul></section>
 </main>
 <footer>
-<p>Some links on this site are affiliate links: if you buy through them, we may earn a small commission at no extra cost to you. <a href="disclosure.html">Read the disclosure</a>.</p>
+<p>Written by the team behind Aquum, a small birth flower gift shop. No affiliate links or paid placements. <a href="disclosure.html">Read the disclosure</a>.</p>
 <p>© 2026 The Birth Flower Almanac</p>
 </footer>
+<script src="flores.js"></script>
+<script>
+document.querySelectorAll(".dibujo-flor").forEach(function (d) {
+  var segunda = d.hasAttribute("data-segunda");
+  var mes = Number(d.getAttribute(segunda ? "data-segunda" : "data-flor"));
+  d.innerHTML = '<svg viewBox="-62 -62 124 124" aria-hidden="true">' + (segunda ? aquumFlorSegunda(mes) : aquumFlor(mes)) + "</svg>";
+});
+</script>
 </body>
 </html>

@@ -207,7 +207,7 @@
       s += `<circle r="9" fill="#5e5a52" stroke="${L}" ${W}/>`;
       for (let i = 0; i < 12; i++) {
         const [x, y] = p(15, i * 30);
-        s += `<path d="M0 0 L${f(x)} ${f(y)}" stroke="#5e5a52" stroke-width="1.6"/><circle cx="${f(x)}" cy="${f(y)}" r="1.8" fill="#5e5a52"/>`;
+        s += `<path d="M0 0 L${f(x)} ${f(y)}" stroke="#5e5a52" stroke-width="1.6"/><circle cx="${f(x)}" cy="${f(y)}" r="1.8" fill="#5e5a52" stroke="none"/>`;
       }
       return s + `<path d="M-5 0 L5 0 M0 -5 L0 5" stroke="#ffffff" stroke-width="1.6" stroke-linecap="round"/>`;
     },
@@ -259,13 +259,18 @@
     grupo.innerHTML = window.aquumFlor(mes);
   };
   /** La misma flor en línea negra y relleno blanco, para colorear. */
-  window.aquumFlorColorear = (mes) =>
-    window.aquumFlor(mes)
+  /**
+   * Pasa un dibujo a línea de un solo color sobre blanco, para colorear o para
+   * clipart: los rellenos quedan blancos, salvo los puntitos sin borde
+   * (estambres), que toman el color de la línea para no desaparecer.
+   */
+  window.aquumEnLinea = (svg, tinta = "#2f2e2b") =>
+    svg
+      .replace(/fill="#[0-9a-fA-F]{6}" stroke="none"/g, 'fill="TINTA" stroke="none"')
       .replace(/fill="#[0-9a-fA-F]{6}"/g, 'fill="#ffffff"')
-      .replace(/stroke="#[0-9a-fA-F]{6}"/g, 'stroke="#2f2e2b"');
-  window.aquumSegundaColorear = (mes) =>
-    window.aquumFlorSegunda(mes)
-      .replace(/fill="#[0-9a-fA-F]{6}"/g, 'fill="#ffffff"')
-      .replace(/stroke="#[0-9a-fA-F]{6}"/g, 'stroke="#2f2e2b"');
+      .replace(/stroke="#[0-9a-fA-F]{6}"/g, 'stroke="TINTA"')
+      .replace(/TINTA/g, tinta);
+  window.aquumFlorColorear = (mes) => window.aquumEnLinea(window.aquumFlor(mes));
+  window.aquumSegundaColorear = (mes) => window.aquumEnLinea(window.aquumFlorSegunda(mes));
   window.AQUUM_FLOR_COLORES = { L, F, F2, C, V, VF };
 })();

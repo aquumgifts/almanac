@@ -33,6 +33,8 @@ ul { padding-left: 22px; }
 .tarjetas a { color: var(--tinta); text-decoration: none; font-size: 22px; }
 .tarjetas p { margin: 6px 0 0; font-size: 16px; color: var(--suave); }
 .pin { margin: 22px auto 30px; max-width: 360px; }
+.dibujo-flor { float: right; width: 120px; height: 120px; margin: 4px 0 12px 18px; }
+.dibujo-flor svg { width: 100%; height: 100%; }
 .pin img { display: block; width: 100%; height: auto; border: 1px solid var(--linea); }
 .destacado { display: flex; gap: 18px; align-items: center; margin: 26px 0 8px; padding: 16px; border: 1px solid var(--linea); background: #fbf8f3; text-decoration: none; color: inherit; }
 .destacado img { width: 110px; height: auto; border: 1px solid var(--linea); flex: none; }
@@ -64,8 +66,10 @@ footer { border-top: 1px solid var(--linea); padding-top: 18px; padding-bottom: 
 
 <p>December has two birth flowers: the <strong>narcissus</strong>, usually the fragrant white paperwhite, and <strong>holly</strong>. Both are winter plants, and both show up in holiday decorations, which is exactly why a December birthday gift built around them needs a little care.</p>
 <h2>What the paperwhite means</h2>
+<div class="dibujo-flor" data-flor="11" role="img" aria-label="Line drawing of the paperwhite"></div>
 <p>The paperwhite narcissus stands for <strong>renewal and good wishes for what's ahead</strong>. It blooms indoors in the darkest weeks of the year, with small star-shaped white flowers and a scent that fills a room.</p>
 <h2>What holly means</h2>
+<div class="dibujo-flor" data-segunda="11" role="img" aria-label="Line drawing of the holly"></div>
 <p>Holly represents <strong>protection and good cheer</strong>. It's the more festive of the two, and the one people already associate with Christmas.</p>
 <h2>The December birthday problem</h2>
 <p>Anyone born in December knows it: gifts that are &quot;for your birthday and Christmas,&quot; a birthday dinner squeezed between holiday plans, a cake that somehow turns into a yule log.</p>
@@ -85,8 +89,16 @@ footer { border-top: 1px solid var(--linea); padding-top: 18px; padding-bottom: 
 </ul></section>
 </main>
 <footer>
-<p>Some links on this site are affiliate links: if you buy through them, we may earn a small commission at no extra cost to you. <a href="disclosure.html">Read the disclosure</a>.</p>
+<p>Written by the team behind Aquum, a small birth flower gift shop. No affiliate links or paid placements. <a href="disclosure.html">Read the disclosure</a>.</p>
 <p>© 2026 The Birth Flower Almanac</p>
 </footer>
+<script src="flores.js"></script>
+<script>
+document.querySelectorAll(".dibujo-flor").forEach(function (d) {
+  var segunda = d.hasAttribute("data-segunda");
+  var mes = Number(d.getAttribute(segunda ? "data-segunda" : "data-flor"));
+  d.innerHTML = '<svg viewBox="-62 -62 124 124" aria-hidden="true">' + (segunda ? aquumFlorSegunda(mes) : aquumFlor(mes)) + "</svg>";
+});
+</script>
 </body>
 </html>

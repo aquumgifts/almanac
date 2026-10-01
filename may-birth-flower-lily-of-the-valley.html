@@ -33,6 +33,8 @@ ul { padding-left: 22px; }
 .tarjetas a { color: var(--tinta); text-decoration: none; font-size: 22px; }
 .tarjetas p { margin: 6px 0 0; font-size: 16px; color: var(--suave); }
 .pin { margin: 22px auto 30px; max-width: 360px; }
+.dibujo-flor { float: right; width: 120px; height: 120px; margin: 4px 0 12px 18px; }
+.dibujo-flor svg { width: 100%; height: 100%; }
 .pin img { display: block; width: 100%; height: auto; border: 1px solid var(--linea); }
 .destacado { display: flex; gap: 18px; align-items: center; margin: 26px 0 8px; padding: 16px; border: 1px solid var(--linea); background: #fbf8f3; text-decoration: none; color: inherit; }
 .destacado img { width: 110px; height: auto; border: 1px solid var(--linea); flex: none; }
@@ -64,8 +66,10 @@ footer { border-top: 1px solid var(--linea); padding-top: 18px; padding-bottom: 
 
 <p>May's birth flowers are the <strong>lily of the valley</strong> and the <strong>hawthorn</strong>. May is also wedding season, and the lily of the valley is one of the most loved bridal flowers of all.</p>
 <h2>What the lily of the valley means</h2>
+<div class="dibujo-flor" data-flor="4" role="img" aria-label="Line drawing of the lily of the valley"></div>
 <p>Lily of the valley stands for <strong>the return of happiness</strong> and sweetness. Its tiny white bells and strong fragrance have made it a favorite in royal bridal bouquets, from Grace Kelly's to the Princess of Wales's.</p>
 <h2>The hawthorn, May's second flower</h2>
+<div class="dibujo-flor" data-segunda="4" role="img" aria-label="Line drawing of the hawthorn"></div>
 <p>The hawthorn means <strong>hope</strong>. In old European traditions its blossoms marked the start of summer and were used to decorate homes on May Day.</p>
 <h2>A safety note</h2>
 <p>Lily of the valley is <strong>poisonous</strong> to people and pets if eaten. It's beautiful in a bouquet held by an adult, but a live plant isn't a good gift for a home with small children, dogs or cats. A lily of the valley <em>design</em> carries the meaning without the risk.</p>
@@ -85,8 +89,16 @@ footer { border-top: 1px solid var(--linea); padding-top: 18px; padding-bottom: 
 </ul></section>
 </main>
 <footer>
-<p>Some links on this site are affiliate links: if you buy through them, we may earn a small commission at no extra cost to you. <a href="disclosure.html">Read the disclosure</a>.</p>
+<p>Written by the team behind Aquum, a small birth flower gift shop. No affiliate links or paid placements. <a href="disclosure.html">Read the disclosure</a>.</p>
 <p>© 2026 The Birth Flower Almanac</p>
 </footer>
+<script src="flores.js"></script>
+<script>
+document.querySelectorAll(".dibujo-flor").forEach(function (d) {
+  var segunda = d.hasAttribute("data-segunda");
+  var mes = Number(d.getAttribute(segunda ? "data-segunda" : "data-flor"));
+  d.innerHTML = '<svg viewBox="-62 -62 124 124" aria-hidden="true">' + (segunda ? aquumFlorSegunda(mes) : aquumFlor(mes)) + "</svg>";
+});
+</script>
 </body>
 </html>

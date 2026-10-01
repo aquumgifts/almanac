@@ -33,6 +33,8 @@ ul { padding-left: 22px; }
 .tarjetas a { color: var(--tinta); text-decoration: none; font-size: 22px; }
 .tarjetas p { margin: 6px 0 0; font-size: 16px; color: var(--suave); }
 .pin { margin: 22px auto 30px; max-width: 360px; }
+.dibujo-flor { float: right; width: 120px; height: 120px; margin: 4px 0 12px 18px; }
+.dibujo-flor svg { width: 100%; height: 100%; }
 .pin img { display: block; width: 100%; height: auto; border: 1px solid var(--linea); }
 .destacado { display: flex; gap: 18px; align-items: center; margin: 26px 0 8px; padding: 16px; border: 1px solid var(--linea); background: #fbf8f3; text-decoration: none; color: inherit; }
 .destacado img { width: 110px; height: auto; border: 1px solid var(--linea); flex: none; }
@@ -64,10 +66,12 @@ footer { border-top: 1px solid var(--linea); padding-top: 18px; padding-bottom: 
 
 <p>October has two birth flowers: the <strong>marigold</strong>, which most lists name first, and the <strong>cosmos</strong>. Both bloom late in the season, when most gardens are winding down, and both carry warm, steady meanings.</p>
 <h2>What the marigold means</h2>
+<div class="dibujo-flor" data-flor="9" role="img" aria-label="Line drawing of the marigold"></div>
 <p>The marigold stands for <strong>warmth and love that stays</strong>. Its color, anywhere from gold to deep orange, has made it a symbol of the sun and of lasting affection in many cultures.</p>
 <p>It's also a flower of <strong>remembrance</strong>. In Mexico, marigolds (<em>cempasúchil</em>) fill the altars of Día de Muertos at the start of November, and their scent and color are said to guide loved ones home. That connection gives the October birth flower a depth most flowers don't have.</p>
 <blockquote>A marigold doesn't say &quot;happy birthday&quot; so much as &quot;I'm glad you're here, and I'll keep you close.&quot;</blockquote>
 <h2>The cosmos, October's second flower</h2>
+<div class="dibujo-flor" data-segunda="9" role="img" aria-label="Line drawing of the cosmos"></div>
 <p>The cosmos means <strong>order, harmony and peace</strong>. It's lighter and more playful than the marigold, a good choice if the person you're shopping for would find the remembrance meaning too heavy for a birthday.</p>
 <h2>Who the marigold suits</h2>
 <ul><li>Someone born in October who loves warm, rich colors</li><li>A friend or relative who is missing someone they lost</li><li>Anyone you want to tell, quietly, that they matter to you</li></ul>
@@ -85,8 +89,16 @@ footer { border-top: 1px solid var(--linea); padding-top: 18px; padding-bottom: 
 </ul></section>
 </main>
 <footer>
-<p>Some links on this site are affiliate links: if you buy through them, we may earn a small commission at no extra cost to you. <a href="disclosure.html">Read the disclosure</a>.</p>
+<p>Written by the team behind Aquum, a small birth flower gift shop. No affiliate links or paid placements. <a href="disclosure.html">Read the disclosure</a>.</p>
 <p>© 2026 The Birth Flower Almanac</p>
 </footer>
+<script src="flores.js"></script>
+<script>
+document.querySelectorAll(".dibujo-flor").forEach(function (d) {
+  var segunda = d.hasAttribute("data-segunda");
+  var mes = Number(d.getAttribute(segunda ? "data-segunda" : "data-flor"));
+  d.innerHTML = '<svg viewBox="-62 -62 124 124" aria-hidden="true">' + (segunda ? aquumFlorSegunda(mes) : aquumFlor(mes)) + "</svg>";
+});
+</script>
 </body>
 </html>
