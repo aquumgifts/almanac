@@ -263,6 +263,7 @@
    * Ramo con las flores de varios meses (una por persona), en una caja de
    * -150 a 150 de ancho y -175 a 175 de alto, en cúpula: tallos que se juntan abajo,
    * un papel de envolver y un lazo. Hasta 8 flores; los meses pueden repetirse.
+   * Los meses van de 0 a 11; de 12 a 23 piden la segunda flor de ese mes.
    */
   const RAMOS = [
     [],
@@ -285,7 +286,9 @@
     s += hojita("M-10 52 C -44 36, -66 14, -100 18 C -82 42, -48 58, -10 52 Z") + hojita("M10 52 C 44 36, 66 14, 100 18 C 82 42, 48 58, 10 52 Z");
     // De atrás (arriba) hacia adelante (abajo), para que las de adelante tapen.
     const orden = pos.map((_, i) => i).sort((a, b) => pos[a][1] - pos[b][1]);
-    for (const i of orden) s += `<g transform="translate(${pos[i][0]} ${pos[i][1]}) scale(${escala})">${window.aquumFlor(meses[i])}</g>`;
+    // Un mes de 12 a 23 es la segunda flor del mes (mes - 12).
+    const dibujo = (m) => (m >= 12 ? window.aquumFlorSegunda(m - 12) : window.aquumFlor(m));
+    for (const i of orden) s += `<g transform="translate(${pos[i][0]} ${pos[i][1]}) scale(${escala})">${dibujo(meses[i])}</g>`;
     // Puntas de los tallos asomando bajo el papel.
     s += `<path d="M-4 150 L-9 172 M0 150 L0 174 M4 150 L9 172" stroke="${V}" ${W}/>`;
     // Papel de envolver en cono, con borde en zigzag, y lazo.

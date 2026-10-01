@@ -38,6 +38,8 @@ ul { padding-left: 22px; }
 .ramo-armador button { font: inherit; font-size: 0.95em; padding: 6px 10px; border: 1px solid var(--linea); background: #fff; color: var(--tinta); cursor: pointer; }
 .ramo-armador button:disabled { opacity: 0.5; cursor: default; }
 #ramo-dibujo { display: block; width: 100%; max-width: 320px; margin: 14px auto 6px; }
+.ramo-opcion { margin-top: 10px; }
+.ramo-opcion label { margin-right: 10px; }
 .ramo-lista { font-style: italic; color: var(--suave); }
 .dibujo-flor { float: right; width: 120px; height: 120px; margin: 4px 0 12px 18px; }
 .dibujo-flor svg { width: 100%; height: 100%; }
@@ -72,9 +74,10 @@ footer { border-top: 1px solid var(--linea); padding-top: 18px; padding-bottom: 
 
 <p>A family birth flower bouquet is a simple idea with a lot of heart: <strong>one flower for each person</strong>, picked by the month they were born, gathered into one bunch. Mom's carnation next to a daughter's daisy and a grandson's marigold. It works as a framed print, a tattoo, a card, or the design on a gift.</p>
 <h2>Build your bouquet</h2>
-<p>Tap a month for each person in the family, up to eight. Tap the same month twice if two people share it.</p>
+<p>Tap a month for each person in the family, up to eight. Tap the same month twice if two people share it, or tick &quot;second flower&quot; to add that month's other flower instead.</p>
 <div class="ramo-armador">
 <div class="ramo-meses" id="ramo-meses"></div>
+<p class="ramo-opcion"><label><input type="checkbox" id="ramo-segunda" /> Second flower</label> <button type="button" id="ramo-quitar">Remove last</button></p>
 <svg id="ramo-dibujo" viewBox="-150 -175 300 355" role="img" aria-label="Your birth flower bouquet"></svg>
 <p id="ramo-lista" class="ramo-lista">Tap a month to add the first flower.</p>
 <p class="ramo-botones"><button type="button" id="ramo-borrar">Start over</button> <button type="button" id="ramo-bajar" disabled>Download as image</button></p>
@@ -84,6 +87,11 @@ footer { border-top: 1px solid var(--linea); padding-top: 18px; padding-bottom: 
 (function () {
   var MESES = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
   var FLORES = ["carnation", "violet", "daffodil", "daisy", "lily of the valley", "rose", "larkspur", "gladiolus", "aster", "marigold", "chrysanthemum", "paperwhite"];
+  // Segundas flores; noviembre no tiene, así que repite el crisantemo.
+  var SEGUNDAS = ["snowdrop", "primrose", "jonquil", "sweet pea", "hawthorn", "honeysuckle", "water lily", "poppy", "morning glory", "cosmos", null, "holly"];
+  var segunda = document.getElementById("ramo-segunda");
+  // En la lista, 0-11 es la flor del mes y 12-23 la segunda flor (como en aquumRamo).
+  var nombre = function (m) { return m >= 12 ? SEGUNDAS[m - 12] : FLORES[m]; };
   var elegidos = [];
   var caja = document.getElementById("ramo-meses");
   var dibujo = document.getElementById("ramo-dibujo");
@@ -92,7 +100,7 @@ footer { border-top: 1px solid var(--linea); padding-top: 18px; padding-bottom: 
   function pintar() {
     dibujo.innerHTML = window.aquumRamo ? aquumRamo(elegidos) : "";
     lista.textContent = elegidos.length
-      ? elegidos.map(function (m) { return MESES[m] + ": " + FLORES[m]; }).join(" · ")
+      ? elegidos.map(function (m) { return MESES[m % 12] + ": " + nombre(m); }).join(" · ")
       : "Tap a month to add the first flower.";
     bajar.disabled = !elegidos.length;
   }
@@ -102,10 +110,16 @@ footer { border-top: 1px solid var(--linea); padding-top: 18px; padding-bottom: 
     b.textContent = mes.slice(0, 3);
     b.title = mes + ": " + FLORES[i];
     b.addEventListener("click", function () {
-      if (elegidos.length < 8) { elegidos.push(i); pintar(); }
+      if (elegidos.length >= 8) return;
+      elegidos.push(segunda.checked && SEGUNDAS[i] ? i + 12 : i);
+      pintar();
     });
     caja.appendChild(b);
   });
+  segunda.addEventListener("change", function () {
+    [].forEach.call(caja.children, function (b, i) { b.title = MESES[i] + ": " + (segunda.checked && SEGUNDAS[i] ? SEGUNDAS[i] : FLORES[i]); });
+  });
+  document.getElementById("ramo-quitar").addEventListener("click", function () { elegidos.pop(); pintar(); });
   document.getElementById("ramo-borrar").addEventListener("click", function () { elegidos = []; pintar(); });
   bajar.addEventListener("click", function () {
     var svg = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="-150 -175 300 355" width="1200" height="1420"><rect x="-150" y="-175" width="300" height="355" fill="#f7f2ea"/>' + dibujo.innerHTML + "</svg>";
