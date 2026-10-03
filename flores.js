@@ -313,3 +313,67 @@
   window.aquumSegundaColorear = (mes) => window.aquumEnLinea(window.aquumFlorSegunda(mes));
   window.AQUUM_FLOR_COLORES = { L, F, F2, C, V, VF };
 })();
+(function () {
+  // Flores de Navidad (no son flores de nacimiento): para la guía de flores
+  // navideñas y sus láminas. Mismo trazo que las demás.
+  //   aquumFlorNavidad("nochebuena" | "rosa" | "amarilis" | "muerdago")
+  const L = "#c98f8f", F = "#f7e6e3", C = "#e8c08b", V = "#8a9a7b", VF = "#dfe5d6";
+  const R = "#e7a3a0", R2 = "#f2c6c3", RL = "#c0605c";
+  const W = 'stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"';
+  const rad = (g) => (g * Math.PI) / 180;
+  const p = (r, a) => [r * Math.cos(rad(a)), r * Math.sin(rad(a))];
+  const f = (n) => n.toFixed(1);
+  // Hoja o bráctea en punta: base redonda en el centro, punta afilada en el ángulo a.
+  function punta(r, w, a, relleno, linea, cx = 0, cy = 0) {
+    const [px, py] = p(r, a), [l1x, l1y] = p(w, a - 90), [l2x, l2y] = p(w, a + 90), [mx, my] = p(r * 0.45, a);
+    return `<path d="M${f(cx)} ${f(cy)} C ${f(cx + mx + l1x)} ${f(cy + my + l1y)}, ${f(cx + px * 0.8 + l1x * 0.4)} ${f(cy + py * 0.8 + l1y * 0.4)}, ${f(cx + px)} ${f(cy + py)} C ${f(cx + px * 0.8 + l2x * 0.4)} ${f(cy + py * 0.8 + l2y * 0.4)}, ${f(cx + mx + l2x)} ${f(cy + my + l2y)}, ${f(cx)} ${f(cy)} Z" fill="${relleno}" stroke="${linea}" ${W}/>`;
+  }
+  // Pétalo ancho y redondeado (rosa de Navidad).
+  function redondo(r, w, a, relleno, linea) {
+    const [px, py] = p(r, a), [l1x, l1y] = p(w, a - 90), [l2x, l2y] = p(w, a + 90);
+    return `<path d="M0 0 C ${f(l1x * 0.9)} ${f(l1y * 0.9)}, ${f(px + l1x)} ${f(py + l1y)}, ${f(px)} ${f(py)} C ${f(px + l2x)} ${f(py + l2y)}, ${f(l2x * 0.9)} ${f(l2y * 0.9)}, 0 0 Z" fill="${relleno}" stroke="${linea}" ${W}/>`;
+  }
+  const circulo = (r, relleno, cx = 0, cy = 0, linea = L) => `<circle cx="${f(cx)}" cy="${f(cy)}" r="${r}" fill="${relleno}" stroke="${linea}" ${W}/>`;
+  const puntitos = (n, r, tam, color) => {
+    let s = "";
+    for (let i = 0; i < n; i++) { const [x, y] = p(r, (360 / n) * i); s += `<circle cx="${f(x)}" cy="${f(y)}" r="${tam}" fill="${color}" stroke="none"/>`; }
+    return s;
+  };
+  const DIBUJOS = {
+    // Nochebuena: seis brácteas grandes y seis chicas entre ellas, centro de botoncitos.
+    nochebuena: () => {
+      let s = "";
+      for (let i = 0; i < 6; i++) s += punta(52, 13, i * 60 - 90, R, RL);
+      for (let i = 0; i < 6; i++) s += punta(34, 10, i * 60 - 60, R2, RL);
+      return s + circulo(4, "#c9d48b", -5, -3, V) + circulo(4, "#c9d48b", 5, -2, V) + circulo(4, "#e8c08b", 0, 5, V);
+    },
+    // Rosa de Navidad (eléboro): cinco pétalos anchos y blancos, corona de estambres.
+    rosa: () => {
+      let s = "";
+      for (let i = 0; i < 5; i++) s += redondo(40, 24, i * 72 - 90, "#fbf7f2", L);
+      return s + circulo(11, "#dfe5d6", 0, 0, V) + puntitos(14, 15, 2.2, C) + puntitos(8, 7, 1.6, C);
+    },
+    // Amarilis, de frente: seis pétalos en punta con una raya clara al medio.
+    amarilis: () => {
+      let s = "";
+      for (let i = 0; i < 6; i++) {
+        const a = i * 60 - 90;
+        s += punta(50, 18, a, i % 2 ? R : R2, RL);
+        const [x, y] = p(30, a);
+        s += `<path d="M0 0 L${f(x)} ${f(y)}" stroke="white" stroke-width="3" stroke-linecap="round"/>`;
+      }
+      s += circulo(7, "#dfe5d6", 0, 0, V);
+      for (let i = 0; i < 6; i++) { const [x, y] = p(18, i * 60 - 60); s += `<path d="M0 0 L${f(x)} ${f(y)}" stroke="${L}" stroke-width="1.4"/>` + `<circle cx="${f(x)}" cy="${f(y)}" r="2.2" fill="${C}" stroke="none"/>`; }
+      return s;
+    },
+    // Muérdago: ramita en horquilla, pares de hojas largas y bayas blancas.
+    muerdago: () => {
+      const hoja = (x, y, a) => punta(30, 8, a, VF, V, x, y);
+      return `<path d="M0 46 L0 10 M0 10 L-16 -14 M0 10 L16 -14" fill="none" stroke="${V}" ${W}/>` +
+        hoja(-16, -14, -130) + hoja(-16, -14, -70) + hoja(16, -14, -110) + hoja(16, -14, -50) + hoja(0, 26, 200) + hoja(0, 26, -20) +
+        circulo(6, "#ffffff", -6, 6, V) + circulo(6, "#ffffff", 6, 6, V) + circulo(6, "#ffffff", 0, -3, V);
+    },
+  };
+  window.aquumFlorNavidad = (nombre) => DIBUJOS[nombre]();
+  window.aquumNavidadColorear = (nombre) => window.aquumEnLinea(DIBUJOS[nombre]());
+})();
