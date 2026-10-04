@@ -69,10 +69,67 @@ table.tabla th { font-weight: normal; font-size: 0.8em; letter-spacing: 0.12em; 
 .llamado { margin: 40px 0 0; padding: 22px; text-align: center; border: 1px solid var(--linea); background: #fbf8f3; }
 footer { border-top: 1px solid var(--linea); padding-top: 18px; padding-bottom: 40px; text-align: center; }
 @media (max-width: 520px) { body { font-size: 17px; } h1 { font-size: 32px; } }
+
+/* ---- Capa visual: hero, rejilla de flores, tienda, animaciones ---- */
+html { scroll-behavior: smooth; }
+main:has(.hero) { max-width: none; padding: 0; }
+html, body { overflow-x: hidden; }
+header { max-width: none; padding: 14px 22px; position: sticky; top: 0; z-index: 10; display: flex; align-items: center; justify-content: space-between; gap: 14px; text-align: left; background: rgba(247,242,234,.92); backdrop-filter: blur(8px); border-bottom: 1px solid var(--linea); }
+header .titulos { display: flex; flex-direction: column; }
+header a.marca { font-size: 24px; }
+header p { margin: 0; font-size: 11px; }
+.boton { display: inline-block; background: var(--rosa); color: #fff !important; text-decoration: none; font: 600 13px/1 "Helvetica Neue", Arial, sans-serif; letter-spacing: .12em; text-transform: uppercase; padding: 13px 20px; border-radius: 999px; transition: transform .2s, box-shadow .2s, background .2s; }
+.boton:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(168,96,95,.3); background: #944f4e; }
+.boton.suave { background: transparent; color: var(--tinta) !important; border: 1px solid var(--tinta); }
+.boton.suave:hover { background: var(--tinta); color: #fff !important; box-shadow: none; }
+header .boton { padding: 10px 16px; font-size: 11px; white-space: nowrap; }
+.hero { max-width: 1040px; margin: 0 auto; padding: 56px 22px 20px; text-align: center; position: relative; }
+.hero .ojo { font: 12px/1 "Helvetica Neue", Arial, sans-serif; letter-spacing: .3em; text-transform: uppercase; color: var(--salvia); }
+.hero h1 { font-family: Didot, "Bodoni 72", "Playfair Display", Georgia, serif; font-size: clamp(38px, 7vw, 68px); line-height: 1.04; margin: 18px 0 14px; }
+.hero h1 em { color: var(--rosa); }
+.hero p.sub { max-width: 560px; margin: 0 auto 26px; color: var(--suave); }
+.hero .acciones { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+.ramo { display: flex; justify-content: center; align-items: flex-end; gap: 0; margin: 38px auto 0; max-width: 960px; }
+.ramo img { width: 17%; min-width: 0; height: auto; margin: 0 -1.2%; filter: drop-shadow(0 12px 14px rgba(59,58,54,.12)); animation: mece 6s ease-in-out infinite; transform-origin: 50% 100%; }
+.ramo img:nth-child(2) { animation-delay: -1.2s; transform: translateY(14px); }
+.ramo img:nth-child(3) { animation-delay: -2.4s; transform: translateY(-6px); }
+.ramo img:nth-child(4) { animation-delay: -3.6s; transform: translateY(18px); }
+.ramo img:nth-child(5) { animation-delay: -4.8s; }
+@keyframes mece { 0%,100% { rotate: -1.6deg; } 50% { rotate: 1.6deg; } }
+.franja { background: linear-gradient(135deg, #efe3d3 0%, #f3e0dc 100%); margin: 44px 0 0; padding: 46px 22px; }
+.franja .dentro { max-width: 1040px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 34px; align-items: center; }
+.franja h2 { font-family: Didot, "Bodoni 72", Georgia, serif; font-size: 34px; margin: 0 0 10px; }
+.franja p { margin: 0 0 20px; color: var(--suave); }
+.franja .tees { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+.franja .tees a { display: block; background: #fbf8f3; border: 1px solid var(--linea); border-radius: 14px; padding: 8px; transition: transform .25s, box-shadow .25s; }
+.franja .tees a:hover { transform: translateY(-5px) rotate(-1deg); box-shadow: 0 12px 24px rgba(59,58,54,.14); }
+.franja .tees img { width: 100%; height: auto; display: block; }
+.docemeses { max-width: 1040px; margin: 0 auto; padding: 46px 22px 0; text-align: center; }
+.docemeses h2 { font-family: Didot, "Bodoni 72", Georgia, serif; font-size: 34px; margin: 0 0 6px; }
+.docemeses .rejilla { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 14px; margin-top: 26px; }
+.docemeses .mes { text-decoration: none; color: var(--tinta); background: #fbf8f3; border: 1px solid var(--linea); border-radius: 18px; padding: 14px 10px 12px; transition: transform .25s, box-shadow .25s, border-color .25s; }
+.docemeses .mes:hover { transform: translateY(-6px); box-shadow: 0 14px 26px rgba(59,58,54,.13); border-color: var(--rosa); }
+.docemeses .mes img { width: 78%; height: 150px; object-fit: contain; display: block; margin: 0 auto 8px; transition: transform .35s; }
+.docemeses .mes:hover img { transform: scale(1.07) rotate(2deg); }
+.docemeses .mes b { display: block; font-weight: normal; font-size: 12px; letter-spacing: .2em; text-transform: uppercase; color: var(--salvia); font-family: "Helvetica Neue", Arial, sans-serif; }
+.docemeses .mes span { font-style: italic; color: var(--rosa); font-size: 18px; }
+.contenido-portada { max-width: 720px; margin: 0 auto; padding: 14px 22px 50px; }
+.tarjetas li { border-radius: 14px; transition: transform .22s, box-shadow .22s, border-color .22s; }
+.tarjetas li:hover { transform: translateY(-3px); box-shadow: 0 10px 22px rgba(59,58,54,.1); border-color: var(--rosa); }
+.llamado { border-radius: 18px; background: linear-gradient(135deg, #fbf8f3, #f6e9e4); display: flex; gap: 18px; align-items: center; text-align: left; flex-wrap: wrap; justify-content: center; }
+.llamado img { width: 110px; height: auto; flex: none; }
+.llamado .texto { flex: 1 1 240px; }
+.aparece { opacity: 0; transform: translateY(18px); transition: opacity .7s ease, transform .7s ease; }
+.aparece.visto { opacity: 1; transform: none; }
+.pin img, .destacado, .ramo-armador, .buscador { border-radius: 12px; }
+.destacado { transition: transform .22s, box-shadow .22s; }
+.destacado:hover { transform: translateY(-3px); box-shadow: 0 10px 22px rgba(59,58,54,.1); }
+@media (max-width: 760px) { .franja .dentro { grid-template-columns: 1fr; } header p { display: none; } .ramo img { width: 20%; } .ramo img:nth-child(n+6) { display: none; } }
+@media (prefers-reduced-motion: reduce) { .ramo img { animation: none; } .aparece { opacity: 1; transform: none; transition: none; } html { scroll-behavior: auto; } }
 </style>
 </head>
 <body>
-<header><a class="marca" href="./">The Birth Flower Almanac</a><p>What every birth flower means, and gifts that say it.</p></header>
+<header><div class="titulos"><a class="marca" href="./">The Birth Flower Almanac</a><p>What every birth flower means, and gifts that say it.</p></div><a class="boton" href="https://www.etsy.com/shop/Aquum" rel="noopener">Shop the tees</a></header>
 <main>
 <article>
 <h1>Cosmos Birth Flower: Meaning, Colors and October Gift Ideas</h1>
@@ -96,7 +153,7 @@ footer { border-top: 1px solid var(--linea); padding-top: 18px; padding-bottom: 
 <h2>October birthday gift ideas with the cosmos</h2>
 <ul><li><strong>Cosmos seeds and a small pot.</strong> It's one of the easiest flowers to grow from seed, and it draws bees and butterflies.</li><li><strong>A cosmos design on something they use daily</strong>, so the meaning stays in sight: a mug, a tote, a shirt.</li><li><strong>Both October flowers together.</strong> Marigold and cosmos side by side make the gift unmistakably about their birth month.</li><li><strong>A handwritten card.</strong> Our <a href="free-printable-birth-flower-birthday-cards.html">free birthday cards</a> and <a href="birth-flower-coloring-pages.html">coloring pages</a> include both October flowers.</li></ul>
 <p>More ideas in <a href="october-birthday-gift-ideas.html">October birthday gift ideas</a>, and every month's second flower is in <a href="second-birth-flowers-by-month.html">second birth flowers by month</a>.</p>
-<div class="llamado">Looking for a birth flower gift? <a href="https://www.etsy.com/shop/Aquum" rel="noopener">See the botanical tees at Aquum</a>, one flower for every month.</div>
+<div class="llamado"><img src="flores/06-june.png" alt="June birth flower, a rose" width="110" height="165" loading="lazy" /><div class="texto"><strong>Looking for a birth flower gift?</strong><br />Botanical tees at Aquum, one illustrated flower for every month.<br /><a class="boton" style="margin-top:12px" href="https://www.etsy.com/shop/Aquum" rel="noopener">See the tees on Etsy</a></div></div>
 </article>
 <section class="relacionadas"><h2>Keep reading</h2>
 <ul class="tarjetas">
@@ -116,6 +173,14 @@ document.querySelectorAll(".dibujo-flor").forEach(function (d) {
   var mes = Number(d.getAttribute(segunda ? "data-segunda" : "data-flor"));
   d.innerHTML = '<svg viewBox="-62 -62 124 124" aria-hidden="true">' + (segunda ? aquumFlorSegunda(mes) : aquumFlor(mes)) + "</svg>";
 });
+</script>
+<script>
+(function () {
+  var els = document.querySelectorAll(".aparece");
+  if (!("IntersectionObserver" in window)) { els.forEach(function (e) { e.classList.add("visto"); }); return; }
+  var o = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add("visto"); o.unobserve(e.target); } }); }, { threshold: 0.12 });
+  els.forEach(function (e) { o.observe(e); });
+})();
 </script>
 </body>
 </html>
