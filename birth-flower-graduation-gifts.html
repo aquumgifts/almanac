@@ -170,6 +170,14 @@ header .boton { padding: 10px 16px; font-size: 11px; white-space: nowrap; }
 .polera-mes strong { display: block; font: normal 24px/1.2 Didot, "Bodoni 72", Georgia, serif; margin: 8px 0 6px; }
 .polera-mes p { margin: 0 0 12px; font-size: 16px; color: var(--suave); }
 @media (max-width: 560px) { .polera-mes { flex-direction: column; text-align: center; } .polera-mes img { width: 100%; height: auto; } }
+
+.galeria-tees { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin: 24px 0 30px; }
+.galeria-tees a { display: block; text-decoration: none; color: var(--tinta); background: #fff; border: 1px solid var(--linea); border-radius: 16px; overflow: hidden; transition: transform .25s, box-shadow .25s, border-color .25s; }
+.galeria-tees a:hover { transform: translateY(-5px); box-shadow: 0 14px 26px rgba(59,58,54,.13); border-color: var(--rosa); }
+.galeria-tees img { display: block; width: 100%; height: auto; aspect-ratio: 1; object-fit: cover; }
+.galeria-tees span { display: block; padding: 8px 10px 11px; font: 12px/1.3 "Helvetica Neue", Arial, sans-serif; letter-spacing: .08em; text-transform: uppercase; text-align: center; }
+.galeria-tees em { display: block; font: italic 16px/1.2 Georgia, serif; text-transform: none; letter-spacing: 0; color: var(--rosa); margin-top: 3px; }
+@media (max-width: 560px) { .galeria-tees { grid-template-columns: repeat(2, 1fr); } }
 @media (prefers-reduced-motion: reduce) { .ramo img { animation: none; } .aparece { opacity: 1; transform: none; transition: none; } html { scroll-behavior: auto; } }
 </style>
 </head>
