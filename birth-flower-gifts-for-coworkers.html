@@ -171,13 +171,22 @@ header .boton { padding: 10px 16px; font-size: 11px; white-space: nowrap; }
 .polera-mes p { margin: 0 0 12px; font-size: 16px; color: var(--suave); }
 @media (max-width: 560px) { .polera-mes { flex-direction: column; text-align: center; } .polera-mes img { width: 100%; height: auto; } }
 
+.tambien-mes { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; margin: -14px 0 30px; }
+.tambien-mes a { display: flex; gap: 14px; align-items: center; padding: 10px; border: 1px solid var(--linea); border-radius: 16px; background: #fbf8f3; text-decoration: none; color: var(--tinta); transition: transform .25s, box-shadow .25s; }
+.tambien-mes a:hover { transform: translateY(-3px); box-shadow: 0 12px 22px rgba(59,58,54,.11); }
+.tambien-mes img { width: 96px; height: 96px; border-radius: 12px; background: #fff; flex: none; }
+.tambien-mes span { font: italic 17px/1.3 Georgia, serif; }
+.tambien-mes em { display: block; font: normal 11px/1 "Helvetica Neue", Arial, sans-serif; letter-spacing: .18em; text-transform: uppercase; color: var(--salvia); margin-top: 7px; }
 .galeria-tees { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin: 24px 0 30px; }
 .galeria-tees a { display: block; text-decoration: none; color: var(--tinta); background: #fff; border: 1px solid var(--linea); border-radius: 16px; overflow: hidden; transition: transform .25s, box-shadow .25s, border-color .25s; }
 .galeria-tees a:hover { transform: translateY(-5px); box-shadow: 0 14px 26px rgba(59,58,54,.13); border-color: var(--rosa); }
 .galeria-tees img { display: block; width: 100%; height: auto; aspect-ratio: 1; object-fit: cover; }
 .galeria-tees span { display: block; padding: 8px 10px 11px; font: 12px/1.3 "Helvetica Neue", Arial, sans-serif; letter-spacing: .08em; text-transform: uppercase; text-align: center; }
 .galeria-tees em { display: block; font: italic 16px/1.2 Georgia, serif; text-transform: none; letter-spacing: 0; color: var(--rosa); margin-top: 3px; }
-@media (max-width: 560px) { .galeria-tees { grid-template-columns: repeat(2, 1fr); } }
+/* las bolsas son 10: dos filas de 5 */
+.galeria-tees.cinco { grid-template-columns: repeat(5, 1fr); gap: 10px; }
+.galeria-tees.cinco em { font-size: 14px; }
+@media (max-width: 560px) { .galeria-tees, .galeria-tees.cinco { grid-template-columns: repeat(2, 1fr); } }
 @media (prefers-reduced-motion: reduce) { .ramo img { animation: none; } .aparece { opacity: 1; transform: none; transition: none; } html { scroll-behavior: auto; } }
 </style>
 </head>
@@ -196,7 +205,7 @@ header .boton { padding: 10px 16px; font-size: 11px; white-space: nowrap; }
 <h2>Ideas by relationship</h2>
 <ul><li><strong>A teammate:</strong> a card with their flower and its meaning. Download our <a href="free-printable-birth-flower-birthday-cards.html">free birth flower birthday cards</a>.</li><li><strong>A boss or manager:</strong> a small framed print. Keep the note short and professional.</li><li><strong>A mentor:</strong> the flower plus one line of thanks. September's aster means wisdom and patience, which fits.</li><li><strong>A team gift:</strong> one flower for each person on the team, in a single frame or on a bulletin board.</li><li><strong>Secret Santa:</strong> see our <a href="secret-santa-gift-ideas-under-30.html">gifts under $30</a>.</li></ul>
 <h2>A wearable option</h2>
-<p>For a close colleague, a soft shirt with their flower makes a casual-Friday gift. See our <a href="birth-flower-t-shirts.html">birth flower T-shirts</a>.</p>
+<p>For a close colleague, a soft shirt with their flower makes a casual-Friday gift. See our <a href="birth-flower-t-shirts.html">birth flower T-shirts</a>. For the desk, a <a href="birth-flower-mugs-and-tote-bags.html">birth flower mug</a> with their flower on both sides.</p>
 <h2>What to write</h2>
 <p>&quot;Happy birthday! Your flower is the <a href="what-to-write-in-a-birthday-card.html">flower]: [meaning]. Seemed right.&quot; Done. See [what to write in a birthday card</a> for every month.</p>
 <p>Not sure of their month? Use the <a href="birth-flower-finder.html">birth flower finder</a>.</p>
@@ -205,8 +214,8 @@ header .boton { padding: 10px 16px; font-size: 11px; white-space: nowrap; }
 <section class="relacionadas"><h2>Keep reading</h2>
 <ul class="tarjetas">
 <li><a href="free-printable-birth-flower-birthday-cards.html">Free Printable Birth Flower Birthday Cards: One for Every Month</a><p>Free printable birthday cards with each month's birth flower and its meaning. Twelve cards, four per page, sized for standard A2 envelopes.</p></li>
+<li><a href="birth-flower-mugs-and-tote-bags.html">Birth Flower Mugs and Tote Bags for Every Month</a><p>Birth flower mugs and canvas tote bags with a botanical illustration of each month's flower. Find the flower, its meaning and the right gift.</p></li>
 <li><a href="snowdrop-birth-flower-meaning.html">Snowdrop Birth Flower: Meaning, Folklore and January Gift Ideas</a><p>The snowdrop is January's second birth flower and means hope. Why it blooms through the snow, the legends behind it, and gift ideas for January birthdays.</p></li>
-<li><a href="primrose-birth-flower-meaning.html">Primrose Birth Flower: Meaning, History and February Gift Ideas</a><p>The primrose is February's second birth flower and means youth and new love. Where its name comes from, its Victorian meaning, and gift ideas.</p></li>
 </ul></section>
 </main>
 <footer>
