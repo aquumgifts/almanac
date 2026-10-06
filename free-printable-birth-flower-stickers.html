@@ -184,10 +184,7 @@ header .boton { padding: 10px 16px; font-size: 11px; white-space: nowrap; }
 .galeria-tees img { display: block; width: 100%; height: auto; aspect-ratio: 1; object-fit: cover; }
 .galeria-tees span { display: block; padding: 8px 10px 11px; font: 12px/1.3 "Helvetica Neue", Arial, sans-serif; letter-spacing: .08em; text-transform: uppercase; text-align: center; }
 .galeria-tees em { display: block; font: italic 16px/1.2 Georgia, serif; text-transform: none; letter-spacing: 0; color: var(--rosa); margin-top: 3px; }
-/* las bolsas son 10: dos filas de 5 */
-.galeria-tees.cinco { grid-template-columns: repeat(5, 1fr); gap: 10px; }
-.galeria-tees.cinco em { font-size: 14px; }
-@media (max-width: 560px) { .galeria-tees, .galeria-tees.cinco { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 560px) { .galeria-tees { grid-template-columns: repeat(2, 1fr); } }
 @media (prefers-reduced-motion: reduce) { .ramo img { animation: none; } .aparece { opacity: 1; transform: none; transition: none; } html { scroll-behavior: auto; } }
 </style>
 </head>
